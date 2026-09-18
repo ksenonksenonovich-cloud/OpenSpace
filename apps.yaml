@@ -1,2 +1,31 @@
+noboard:
+  git: https://github.com/KsenonMusicGames/NoBoard
+  name: "Не иди к доске"
+  description: |
+    игра где надо вращать человечка и доску
+
+    <b>Features</b>
+
+    - Rotation
+
   # As described on https://f-droid.org/en/docs/Build_Metadata_Reference/#Categories,
   # you can use any name here, but you should look at the existing categories first
+  categories: 
+    - Casual
+
+floorislava:
+  git: https://github.com/KsenonMusicGames/Floor-is-Lava
+  name: "Пол это лава"
+  description: |
+     платформер где надо доходить до двери
+
+    <b>Features</b>
+
+    -Walking
+
+  # As described on https://f-droid.org/en/docs/Build_Metadata_Reference/#Categories,
+  # you can use any name here, but you should look at the existing categories first
+  categories: 
+    - Adventure
+
+
