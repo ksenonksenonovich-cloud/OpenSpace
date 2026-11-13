@@ -1,2 +1,17 @@
+noboard:
+  git: https://github.com/KsenonMusicGames/NoBoard
+  name: "Не иди к доске"
+  # The latest APK has no raster launcher icon for fdroid to extract,
+  # so this one is used instead.
+  icon: assets/icon/NBIcon.png
+  description: |
+    Игра где надо вращать человечка и доску
+    <b>Features</b>
+
+    - Play
+
   # As described on https://f-droid.org/en/docs/Build_Metadata_Reference/#Categories,
   # you can use any name here, but you should look at the existing categories first
+  categories: 
+    - Games
+
