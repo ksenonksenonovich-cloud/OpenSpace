@@ -1,0 +1,42 @@
+name: Bootstrap F-Droid repo
+on:
+  workflow_dispatch:   # запускается вручную из вкладки Actions
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install fdroidserver
+        run: |
+          sudo add-apt-repository -y ppa:fdroid/fdroidserver
+          sudo apt-get update
+          sudo apt-get install -y fdroidserver
+
+      - name: Init repo and build initial index
+        run: |
+          cd fdroid
+          fdroid init
+          sed -i "s|repo_url: .*|repo_url: https://raw.githubusercontent.com/${{ github.repository }}/main/fdroid/repo|" config.yml
+          sed -i "s|repo_name: .*|repo_name: OpenSpace Repo|" config.yml
+          fdroid update --create-metadata -v
+
+      - name: Print secrets values
+        run: |
+          echo "=== CONFIG_YML (base64) ==="
+          base64 -w0 fdroid/config.yml
+          echo ""
+          echo "=== KEYSTORE_P12 (base64) ==="
+          base64 -w0 fdroid/keystore.p12
+
+      - name: Commit generated index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fdroid/repo fdroid/metadata
+          git commit -m "Bootstrap F-Droid index" || echo "Nothing to commit"
+          git push
